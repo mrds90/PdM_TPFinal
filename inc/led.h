@@ -22,6 +22,18 @@ extern "C" {
 #endif
 
 /*=====[Definition macros of public constants]===============================*/
+/**
+ * @brief Con estos DEFINE se define en un unico numero de 6 bits que leds se encuentran activos.
+ * Ejemplo: 00110101 -> leds: LEDR, LEDB, LED2 y LED3
+ * Esto se puede escribir como: leds =  LEDR_ON | LEDB_ON | LED2_ON | LED3_ON
+ * 
+ */
+#define LEDR_ON      (1 << (LEDR - LEDR)) // LEDR ON
+#define LEDG_ON      (1 << (LEDG - LEDR)) // LEDG ON
+#define LEDB_ON      (1 << (LEDB - LEDR)) // LEDB ON
+#define LED1_ON      (1 << (LED1 - LEDR)) // LED1 ON
+#define LED2_ON      (1 << (LED2 - LEDR)) // LED2 ON
+#define LED3_ON      (1 << (LED3 - LEDR)) // LED3 ON
 
 /*=====[Public function-like macros]=========================================*/
 /**
@@ -55,6 +67,12 @@ bool_t encenderLedUnico(gpioMap_t led);
  * @return bool_t 
  */
 bool_t apagarLeds(void);
+/**
+ * @brief Select the LED to turn on by a binary mask. LEDR_ON, LEDG_ON, LEDB_ON , LED1_ON , LED2_ON , LED3_ON macros are the reference for the mask.
+ * 
+ * @param code 
+ */
+void LEDOnSelection(uint8_t code);
 /*=====[Prototypes (declarations) of public interrupt functions]=============*/
 
 /*=====[C++ - end]===========================================================*/

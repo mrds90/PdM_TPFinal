@@ -6,9 +6,8 @@
 
 /*=====[Inclusions of function dependencies]=================================*/
 
-#include "teclas.h"
+#include "button.h"
 #include "sapi.h"
-#include "secuencias.h"
 
 /*=====[Definition macros of private constants]==============================*/
 #define PERIODO_1S              1000 
@@ -52,7 +51,7 @@ static void buttonReleased(dbn_t *tecla);
 static void buttonPressed(dbn_t *tecla);
 
 /*=====[Implematation of public functions]==================================*/
-void IniciarMEFTecla(gpioMap_t index_tecla) {
+void FSMButtonInit(gpioMap_t index_tecla) {
    uint8_t array_index = index_tecla - TEC1;
    teclas[array_index].tecla = index_tecla;
    teclas[array_index].state = UP;
@@ -60,7 +59,7 @@ void IniciarMEFTecla(gpioMap_t index_tecla) {
    teclas[array_index].flag_fall = FALSE;
 }
 
-void UpdateMEFTecla(gpioMap_t index_tecla) {
+void FSMButtonUpdate(gpioMap_t index_tecla) {
    uint8_t array_index = index_tecla - TEC1;
    teclas[array_index].tecla = index_tecla;
    void (*AntiReboteFunc[DEBOUNCE_QTY])(dbn_t *dataTecla) = {UpState, FallingState ,DownState, RisingState};

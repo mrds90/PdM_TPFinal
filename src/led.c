@@ -37,5 +37,19 @@ bool_t encenderLedUnico(gpioMap_t led) {
 	return no_error;
 }
 
-
+/**
+ * @brief Función que decodifica los led que hay que encender y apagar segun el valor de la variable secuencia en ptrLed.
+ * 
+ */
+void LEDOnSelection(uint8_t code) {
+   uint8_t led;
+   for (led = 0; led < (LED3 - LEDR + 1); led++) {
+      if (code & (1<<led)) {
+         encenderLed(led+LEDR);
+      }
+      else {
+         apagarLed(led+LEDR);
+      }
+   }
+}
 

@@ -5,8 +5,8 @@
 
 /*=====[Avoid multiple inclusion - begin]====================================*/
 
-#ifndef __RANGE_H__
-#define __RANGE_H__
+#ifndef __SENSE_H__
+#define __SENSE_H__
 
 /*=====[Inclusions of public function dependencies]==========================*/
 
@@ -20,11 +20,19 @@ extern "C" {
 #endif
 
 /*=====[Definition macros of public constants]===============================*/
-
+#define ADC_BITS_RESOLUTION 10
 /*=====[Public function-like macros]=========================================*/
 
 /*=====[Definitions of public data types]====================================*/
+void ADCConfig(void *ptr_function);
 
+void ADCDisable(void);
+
+void ADCRead(void);
+
+bool_t ADCDataAvailable(void);
+
+uint16_t ADCDataValue(void);
 /*=====[Prototypes (declarations) of public functions]=======================*/
 
 /*=====[Prototypes (declarations) of public interrupt functions]=============*/
@@ -37,4 +45,4 @@ extern "C" {
 
 /*=====[Avoid multiple inclusion - end]======================================*/
 
-#endif /* __RANGE_H__ */
+#endif /* __SENSE_H__ */
