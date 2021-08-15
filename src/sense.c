@@ -27,7 +27,7 @@ void ADCConfig(void *ptr_function) {
 	ADCCallback = ptr_function;
     /* Config ADC0 sample mode */      
 	ADC_CLOCK_SETUP_T ADCSetup = {
-		ADC_MAX_SAMPLE_RATE,   // ADC Sample rate:ADC_MAX_SAMPLE_RATE = 400KHz
+		1,   // ADC Sample rate:ADC_MAX_SAMPLE_RATE = 400KHz
 		10,                    // ADC resolution: ADC_10BITS = 10
 		0                      // ADC Burst Mode: (true or false)
 	};
@@ -49,12 +49,6 @@ void ADCConfig(void *ptr_function) {
 
 	Chip_ADC_EnableChannel( LPC_ADC0, ADC_CH4, DISABLE );
 	Chip_ADC_Int_SetChannelCmd( LPC_ADC0, ADC_CH4, DISABLE );
-
-	// For aditional ADC Inputs (Pablo Gomez)
-	#if BOARD==edu_ciaa_nxp
-	Chip_SCU_ADC_Channel_Config( 0, 4 );                      // Revisar codigo
-	Chip_ADC_Int_SetChannelCmd( LPC_ADC0, ADC_CH5, DISABLE ); // Revisar codigo
-	#endif
 
 	Chip_ADC_EnableChannel(LPC_ADC0, ADC_CH1, ENABLE);
 	Chip_ADC_Int_SetChannelCmd(LPC_ADC0, ADC_CH1, ENABLE);

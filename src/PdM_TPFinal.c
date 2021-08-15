@@ -13,6 +13,9 @@
 /*=====[Definition macros of private constants]==============================*/
 #define RESUME_STATUS_QTY 3
 #define BINARY_MAX_REPRESENTATION 15
+#define WINDOW_SIZE 16
+#define WINDOW_SIZE_BIT 4
+
 typedef enum {
    FSM_NORMAL,
    FSM_RESUME,
@@ -66,7 +69,8 @@ static void ISRAdquisition(void);
 /*=====[Definitions of private global variables]=============================*/
 static fsm_state_t state;
 static uint8_t voltage_value = 0;
-bool_t value_updated_flag = FALSE;
+static bool_t value_updated_flag = FALSE;
+static delay_t delay_main;
 // __WFI
 // sleepUntilNextInterrupt()
 
@@ -85,8 +89,10 @@ int main( void )
 
 
 static void FSMMainPrgInit(void) {
-   state = FSM_NORMAL;
+   state = FSM_SLEEP;
+   delayConfig(&delay_main, 300);
    boardInit();
+   FSMButtonInit(TEC1);
    FSMButtonInit(TEC2);
    FSMButtonInit(TEC3);
    ADCConfig(ISRAdquisition);
@@ -99,25 +105,34 @@ static void FSMMainPrgUpdate(void) {
 
 static void NormalStateFunc(void) {
    state = FSM_NORMAL;
+   static uint8_t v_window[WINDOW_SIZE] = {0};
+   static uint8_t index = 0;
+   static uint16_t v_acum = 0;
+
+
+
    
-   if (value_updated_flag) {
+   if (value_updated_flag && delayRead(&delay_main)) {
       value_updated_flag = FALSE;
-      LEDOnSelection(voltage_value << (LEDB - LEDR)); //LEDB as LSB
-      ADCConfig(ISRAdquisition);
+      v_acum += voltage_value;
+      v_acum -= v_window[index];
+      v_window[index] = voltage_value;
+      index = (index + 1) % WINDOW_SIZE;
+      uint8_t v_prom = v_acum >> WINDOW_SIZE_BIT;
+      LEDOnSelection(v_prom << (LEDB - LEDR)); //LEDB as LSB
    }
 
    FSMButtonUpdate(TEC3);
-   if(CheckFallState(TEC3)){
-      state = FSM_SLEEP;
-      FSMButtonInit(TEC1);
-      encenderLedUnico(0);// Turn off all leds.
+   if(CheckFallState(TEC3)) {
       ADCDisable();
+      encenderLedUnico(0);// Turn off all leds.
+      state = FSM_SLEEP;
    }
 
    FSMButtonUpdate(TEC2);
    if(CheckFallState(TEC2)){
-      state = FSM_RESUME;
       ADCDisable();
+      state = FSM_RESUME;
    }
 }
 
@@ -126,7 +141,7 @@ static void ResumeStateFunc(void) {
    
    state = FSM_RESUME;
 
-   uint8_t resume_status = (voltage_value * RESUME_STATUS_QTY) >> ADC_BITS_RESOLUTION; //0 to 2 posible values.
+   uint8_t resume_status = voltage_value / (BINARY_MAX_REPRESENTATION / 3); //0 to 2 posible values.
    encenderLedUnico(resume_leds[resume_status]);
 
    FSMButtonUpdate(TEC2);
@@ -154,9 +169,8 @@ static void AdquisitionStateFunc(void) {
 }
 
 static void ISRAdquisition(void) {
-   state = FSM_ADQUISITION;
    ADCRead();
-   ADCDisable();
+   state = FSM_ADQUISITION;
 }
 
 
