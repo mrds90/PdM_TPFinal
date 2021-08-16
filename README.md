@@ -81,7 +81,7 @@ This proyect use de CH1 of de Analgog inputs. An easy way to test this firmware 
   ![alt text](https://github.com/mrds90/PdM_TPFinal/blob/main/docs/HardwareSetup.png?raw=true)
 ## Help
 
-The selecte board could be incorrect. To resolve this you can write in the terminal
+The selected board could be incorrect. To resolve this you can write in the terminal
 ```
 make select_board
 ```
