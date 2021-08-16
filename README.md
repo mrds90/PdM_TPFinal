@@ -15,11 +15,11 @@ This aplication have 3 modes
 
 ## Dependences
 ### CIAA Software
-The CIAA Softwar is necesary to compile and download the proyect.
-The CIAA Software can be downloaded and installed following de [CIAA SOFTWARE TUTORIAL](https://github.com/epernia/software/)
+The CIAA Software is necesary to compile and download the proyect.
+The CIAA Software can be downloaded and installed following the [CIAA SOFTWARE TUTORIAL](https://github.com/epernia/software/)
 ### Firmware v3
-The [firmware_v3](https://github.com/epernia/firmware_v3/) is the firmware that de CIAA Proyect develop to use the hardware.
-From this firmware is used the ´´´sapi´´´ that is the HAL implemented in the proyect.
+The [firmware_v3](https://github.com/epernia/firmware_v3/) is the firmware that the CIAA Proyect develop to use the hardware.
+From this firmware is used the sapi that is the HAL implemented in the proyect.
 
 For more information to use the firmware_v3 you can read the [English Readme](https://github.com/epernia/firmware_v3/blob/master/documentation/firmware/readme/readme-en.md) or [Spanish Readme](https://github.com/epernia/firmware_v3/blob/master/documentation/firmware/readme/readme-es.md)
 
@@ -49,7 +49,7 @@ In FALLING and RISING state the FSM check for a debounce efect. If the transitio
 This layer manage the lighting and shutdown of the leds.
 
 ## Download
-Open a Terminal where you have the firwate_v3 proyects to download this proyect and write
+Open a Terminal where you have the firmware_v3 proyects to download this proyect and write
 ```
 git clone https://github.com/mrds90/PdM_TPFinal
 ```
