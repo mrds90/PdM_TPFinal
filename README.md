@@ -49,7 +49,7 @@ In FALLING and RISING state the FSM check for a debounce efect. If the transitio
 This layer manage the lighting and shutdown of the leds.
 
 ## Download
-Open a Terminal where you have the firmware_v3 proyects to download this proyect and write
+Open a Terminal where you have the firmware_v3 proyects to download this proyect. To do it should write:
 ```
 git clone https://github.com/mrds90/PdM_TPFinal
 ```
