@@ -59,7 +59,7 @@ git clone https://github.com/mrds90/PdM_TPFinal
 
   ![alt text](https://github.com/mrds90/PdM_TPFinal/blob/main/docs/launcher-win.png?raw=true)
   
-* use ´´´cd´´´ command and move to fimware_v3 path.
+* use cd command and move to fimware_v3 path.
 * select the program writing:
 ```
 make select_program
