@@ -33,7 +33,7 @@ The PdM_TPFinal is the highest layer and use the services of the other layer. Th
 ### Main
 This is the aplication layer. In this files the aplication use the services of the other layers to executes the states decribed on Description section.
 In the figure there is the state representation of the system.
-![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
+![alt text](https://github.com/mrds90/PdM_TPFinal/blob/main/docs/launcher-win.png?raw=true)
 
 ### Button
 This layer is a 4 state FSM that check the state of the asked button. Each button may be in one of the four states.
@@ -49,26 +49,29 @@ In FALLING and RISING state the FSM check for a debounce efect. If the transitio
 This layer manage the lighting and shutdown of the leds.
 
 ## Download
-Open a Terminal where you want to download this proyect and write
+Open a Terminal where you have the firwate_v3 proyects to download this proyect and write
 ```
 git clone https://github.com/mrds90/PdM_TPFinal
 ```
 ## Compile
 
 * Open the CIAA-Luncher and select the linux terminal
+
+  ![alt text](https://github.com/mrds90/PdM_TPFinal/blob/main/docs/launcher-win.png?raw=true)
   
-* Seleccionar el programa con el comando
+* use ´´´cd´´´ command and move to fimware_v3 path.
+* select the program writing:
 ```
 make select_program
 ```
-* Elegir la carpeta del repositorio descargado (PmC_Actividad3)
-* Compilar el programa el programa en la misma terminal con:
+* Choose the downladed repositorie (PdM_TPFinal)
+* Compile writing
 ```
 make all
 ```
-##  Descargar programa en edu_cia_nxp
+##  Download the firmware in the edu_cia_nxp
 
-* En la misma terminal y con la edu_ciaa_nxp conectada escribir
+* Write in the terminal
 
 ```
 make download
@@ -76,18 +79,13 @@ make download
 
 ## Help
 
-Puede no tener seleccionado la placa correcta. Para corregir esto escriba
+The selecte board could be incorrect. To resolve this you can write in the terminal
 ```
 make select_board
 ```
-y seleccione la edu_ciaa_nxp
+and select edu_ciaa_nxp
 
-Siempre debe estar en la ruta raiz de la carpeta clonada "firmware_v3" con la terminal de CIAA Launcher si desea usar los comandos.
-
-Si el orden de los LEDs no son correspondientes debe comentar el #define del simbolo EDU_CIAA_OLD. (linea 15 del archivo semaforo.c)
-```
-// #define EDU_CIAA_OLD
-```
+Always the terminal must be in the root path of firmware_v3 to use the command with CIAA Launcher terminal.
 
 ## Autor
 
