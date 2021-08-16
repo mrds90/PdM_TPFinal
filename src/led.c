@@ -8,7 +8,7 @@
 
 #include "led.h"
 
-bool_t apagarLeds(void) {
+bool_t LedTurnOffAll(void) {
 	bool_t no_error;
 	uint8_t i;
 	for (i = LEDR ; i <= LED3 ; i++) {
@@ -20,7 +20,7 @@ bool_t apagarLeds(void) {
 	return no_error;
 }
 
-bool_t encenderLedUnico(gpioMap_t led) {
+bool_t LedTurnOnOne(gpioMap_t led) {
 	bool_t no_error;
 	uint8_t i;
 	for (i = LEDR ; i <= LED3 ; i++) {
@@ -37,11 +37,7 @@ bool_t encenderLedUnico(gpioMap_t led) {
 	return no_error;
 }
 
-/**
- * @brief Función que decodifica los led que hay que encender y apagar segun el valor de la variable secuencia en ptrLed.
- * 
- */
-void LEDOnSelection(uint8_t code) {
+void LedTurnOnSeveral(uint8_t code) {
    uint8_t led;
    for (led = 0; led < (LED3 - LEDR + 1); led++) {
       if (code & (1<<led)) {

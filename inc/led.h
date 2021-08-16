@@ -23,9 +23,9 @@ extern "C" {
 
 /*=====[Definition macros of public constants]===============================*/
 /**
- * @brief Con estos DEFINE se define en un unico numero de 6 bits que leds se encuentran activos.
- * Ejemplo: 00110101 -> leds: LEDR, LEDB, LED2 y LED3
- * Esto se puede escribir como: leds =  LEDR_ON | LEDB_ON | LED2_ON | LED3_ON
+ * @brief With this macro you can set the color of the led. Is a 6 bit value that define wich leds will be used.
+ * Example: 00110101 -> leds: LEDR, LEDB, LED2 y LED3
+ * This should be write as: leds =  LEDR_ON | LEDB_ON | LED2_ON | LED3_ON
  * 
  */
 #define LEDR_ON      (1 << (LEDR - LEDR)) // LEDR ON
@@ -55,24 +55,24 @@ extern "C" {
 
 /*=====[Prototypes (declarations) of public functions]=======================*/
 /**
- * @brief Enciende el led que se le pasa por argumento y apaga los otros, si entra un valor que no corresponde a ningun led apaga todos *
+ * @brief Turn on one led and shutdown the others
  * 
  * @param led gpioMap_t
- * @return bool_t (true si pudo escribir todos los pines)
+ * @return bool_t (TRUE if it was possible to turn on the led)
  */
-bool_t encenderLedUnico(gpioMap_t led);
+bool_t LedTurnOnOne(gpioMap_t led);
 /**
- * @brief Apaga todos los leds
+ * @brief Turn off all leds
  * 
  * @return bool_t 
  */
-bool_t apagarLeds(void);
+bool_t LedTurnOffAll(void);
 /**
  * @brief Select the LED to turn on by a binary mask. LEDR_ON, LEDG_ON, LEDB_ON , LED1_ON , LED2_ON , LED3_ON macros are the reference for the mask.
  * 
  * @param code 
  */
-void LEDOnSelection(uint8_t code);
+void LedTurnOnSeveral(uint8_t code);
 /*=====[Prototypes (declarations) of public interrupt functions]=============*/
 
 /*=====[C++ - end]===========================================================*/

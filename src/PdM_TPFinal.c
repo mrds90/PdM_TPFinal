@@ -13,8 +13,9 @@
 /*=====[Definition macros of private constants]==============================*/
 #define RESUME_STATUS_QTY 3
 #define BINARY_MAX_REPRESENTATION 15
-#define WINDOW_SIZE 16
-#define WINDOW_SIZE_BIT 4
+#define WINDOW_SIZE 8
+#define WINDOW_SIZE_BIT 3
+#define DELAY_TIME_MS 30
 
 typedef enum {
    FSM_NORMAL,
@@ -63,25 +64,24 @@ static void AdquisitionStateFunc(void);
 static void ISRAdquisition(void);
 
 /*=====[Definitions of extern global variables]==============================*/
+// __WFI
+// sleepUntilNextInterrupt()
 
 /*=====[Definitions of public global variables]==============================*/
 
 /*=====[Definitions of private global variables]=============================*/
-static fsm_state_t state;
-static uint8_t voltage_value = 0;
-static bool_t value_updated_flag = FALSE;
-static delay_t delay_main;
-// __WFI
-// sleepUntilNextInterrupt()
+static fsm_state_t state;//<! current state of the state machine
+static uint8_t voltage_value = 0;//<! voltage value read from the ADC conversion
+static bool_t value_updated_flag = FALSE;//<! flag that indicates if the voltage value has been updated
+static delay_t delay_main;//<! delay timer for the main state machine
 
 /*=====[Main function, program entry point after power on or reset]==========*/
 
-int main( void )
-{
+int main(void) {
    // ----- Setup -----------------------------------
    FSMMainPrgInit();
    // ----- Repeat for ever -------------------------
-   while( true ) {
+   while(TRUE) {
       FSMMainPrgUpdate();
    }
    return 0;
@@ -90,7 +90,7 @@ int main( void )
 
 static void FSMMainPrgInit(void) {
    state = FSM_SLEEP;
-   delayConfig(&delay_main, 300);
+   delayConfig(&delay_main, DELAY_TIME_MS);
    boardInit();
    FSMButtonInit(TEC1);
    FSMButtonInit(TEC2);
@@ -108,27 +108,26 @@ static void NormalStateFunc(void) {
    static uint8_t v_window[WINDOW_SIZE] = {0};
    static uint8_t index = 0;
    static uint16_t v_acum = 0;
-
-
-
    
-   if (value_updated_flag && delayRead(&delay_main)) {
-      value_updated_flag = FALSE;
-      v_acum += voltage_value;
-      v_acum -= v_window[index];
-      v_window[index] = voltage_value;
-      index = (index + 1) % WINDOW_SIZE;
-      uint8_t v_prom = v_acum >> WINDOW_SIZE_BIT;
-      LEDOnSelection(v_prom << (LEDB - LEDR)); //LEDB as LSB
+   if (value_updated_flag && delayRead(&delay_main)) {//<! if the voltage value has been updated and the delay timer has expired
+      value_updated_flag = FALSE;//<! reset the flag
+      /* 8 bytes buffer FIFO to implement a low pass filter (moving average) */
+      v_acum += voltage_value;//<! add the new voltage value to the acumulator
+      v_acum -= v_window[index];//<! subtract the old voltage value from the acumulator
+      v_window[index] = voltage_value;//<! save the new voltage value in the buffer
+      index = (index + 1) % WINDOW_SIZE;//<! increment the index
+      uint8_t v_avrg = v_acum >> WINDOW_SIZE_BIT;//<! calculate the average voltage value
+      
+      LedTurnOnSeveral(v_avrg << (LEDB - LEDR)); //LEDB as LSB
    }
-
+   //FSM_SLEEP input
    FSMButtonUpdate(TEC3);
    if(CheckFallState(TEC3)) {
       ADCDisable();
-      encenderLedUnico(0);// Turn off all leds.
+      LedTurnOffAll();//<! turn off the leds
       state = FSM_SLEEP;
    }
-
+   //FSM_RESUME input
    FSMButtonUpdate(TEC2);
    if(CheckFallState(TEC2)){
       ADCDisable();
@@ -137,18 +136,18 @@ static void NormalStateFunc(void) {
 }
 
 static void ResumeStateFunc(void) {
-   gpioMap_t resume_leds[] = {LEDB, LEDG, LEDR};
+   gpioMap_t resume_leds[] = {LEDB, LEDG, LEDR};//<! resume leds in order
    
    state = FSM_RESUME;
 
    uint8_t resume_status = voltage_value / (BINARY_MAX_REPRESENTATION / 3); //0 to 2 posible values.
-   encenderLedUnico(resume_leds[resume_status]);
+   LedTurnOnOne(resume_leds[resume_status]);
 
    FSMButtonUpdate(TEC2);
    if(CheckRaiseState(TEC2)){
       state = FSM_NORMAL;
       ADCConfig(ISRAdquisition);
-      encenderLedUnico(0);//turn off all leds
+      LedTurnOnOne(0);//turn off all leds
    }
 }
 
@@ -167,6 +166,8 @@ static void AdquisitionStateFunc(void) {
    value_updated_flag = TRUE;
    state = FSM_NORMAL;
 }
+
+/*=====[Implementation of private interrupt functions]=================*/
 
 static void ISRAdquisition(void) {
    ADCRead();
