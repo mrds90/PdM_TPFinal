@@ -48,6 +48,9 @@ In FALLING and RISING state the FSM check for a debounce efect. If the transitio
 ### Led
 This layer manage the lighting and shutdown of the leds.
 
+### Sense
+This layer manage the adc reading and interrupts.
+
 ## Download
 Open a Terminal where you have the firmware_v3 proyects to download this proyect. To do it should write:
 ```
