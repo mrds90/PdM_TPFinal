@@ -33,7 +33,7 @@ The PdM_TPFinal is the highest layer and use the services of the other layer. Th
 ### Main
 This is the aplication layer. In this files the aplication use the services of the other layers to executes the states decribed on Description section.
 In the figure there is the state representation of the system.
-![alt text](https://github.com/mrds90/PdM_TPFinal/blob/main/docs/launcher-win.png?raw=true)
+![alt text](https://github.com/mrds90/PdM_TPFinal/blob/main/docs/Mef.png?raw=true)
 
 ### Button
 This layer is a 4 state FSM that check the state of the asked button. Each button may be in one of the four states.
@@ -76,7 +76,9 @@ make all
 ```
 make download
 ```
-
+## Hardware Setup
+This proyect use de CH1 of de Analgog inputs. An easy way to test this firmware is with the hardware setup of the following picture:
+  ![alt text](https://github.com/mrds90/PdM_TPFinal/blob/main/docs/HardwareSetup.png?raw=true)
 ## Help
 
 The selecte board could be incorrect. To resolve this you can write in the terminal
