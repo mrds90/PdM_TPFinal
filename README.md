@@ -6,7 +6,7 @@ Read the voltage of a DC signal and show the value with binary code using 4 leds
 
 This aplication have 3 modes
 
-| State  | Out                                                             |
+| State  | Output                                                          |
 | ------ | --------------------------------------------------------------- |
 | Normal | Read the adc value and show it with the leds as a binary number |
 | Resume | Use RGB leds to communicate a high, normal or low voltage       |
