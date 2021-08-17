@@ -92,7 +92,7 @@ and select edu_ciaa_nxp
 
 Always the terminal must be in the root path of firmware_v3 to use the command with CIAA Launcher terminal.
 
-## Autor
+## Author
 
 Marcos Dominguez
 [@mrds90](https://github.com/mrds90)
