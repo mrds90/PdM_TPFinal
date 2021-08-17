@@ -25,13 +25,13 @@ For more information to use the firmware_v3 you can read the [English Readme](ht
 
 ## Arquitecture
 
-The PdM_TPFinal is the highest layer and use the services of the other layer. This files are:
+The PdM_TPFinal is the highest layer and use the services of the other layer. This second layer have 3 files:
 * button
 * led
 * sense
 
 ### Main
-This is the application layer. In this files the application use the services of the other layers to executes the states described on Description section.
+This is the application layer. In this files the application use the services of the other layer to executes the states described on Description section.
 In the figure there is the state representation of the system.
 ![alt text](https://github.com/mrds90/PdM_TPFinal/blob/main/docs/Mef.png?raw=true)
 
@@ -52,7 +52,8 @@ This layer manage the lighting and shutdown of the leds.
 This layer manage the adc reading and interrupts.
 
 ## Download
-Open a Terminal where you have the firmware_v3 projects to download this project. To do it should write:
+* Open a Terminal in firmware_v3 projects path to download this project.
+* Download the project writing:
 ```
 git clone https://github.com/mrds90/PdM_TPFinal
 ```
