@@ -18,14 +18,14 @@ This aplication have 3 modes
 The CIAA Software is necessary to compile and download the project.
 The CIAA Software can be downloaded and installed following the [CIAA SOFTWARE TUTORIAL](https://github.com/epernia/software/)
 ### Firmware v3
-The [firmware_v3](https://github.com/epernia/firmware_v3/) is the firmware that the CIAA Project develop to use the hardware.
+The [firmware_v3](https://github.com/epernia/firmware_v3/) is the firmware that the CIAA Project developed to use the hardware.
 From this firmware is used the sapi that is the HAL implemented in the project.
 
 For more information to use the firmware_v3 you can read the [English Readme](https://github.com/epernia/firmware_v3/blob/master/documentation/firmware/readme/readme-en.md) or [Spanish Readme](https://github.com/epernia/firmware_v3/blob/master/documentation/firmware/readme/readme-es.md)
 
 ## Arquitecture
 
-The PdM_TPFinal is the highest layer and use the services of the other layer. This second layer have 3 files:
+The PdM_TPFinal is the main layer and use the services of the other layer. This second layer have 3 files:
 * button
 * led
 * sense
