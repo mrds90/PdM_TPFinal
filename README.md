@@ -44,12 +44,12 @@ This states are:
 * DOWN
 * RISING
 
-In FALLING and RISING state the FSM check for a debounce effect. If the transition from UP to DOWN is confirmed the FSM report with a flag that the button was pressed. Similar behavior for DOWN to UP transition.
+In FALLING and RISING state the FSM check for a debounce effect. If the transition from UP to DOWN is confirmed the FSM report with a flag that the button was pressed. The behavior for DOWN to UP transition is similar.
 ### Led
 This layer manage the lighting and shutdown of the leds.
 
 ### Sense
-This layer manage the adc reading and interrupts.
+This layer manage the adc reading and interrupt.
 
 ## Download
 * Open a Terminal in firmware_v3 projects path to download this project.
@@ -68,7 +68,7 @@ git clone https://github.com/mrds90/PdM_TPFinal
 ```
 make select_program
 ```
-* Choose the downloaded repositories (PdM_TPFinal)
+* Choose the downloaded repositorie (PdM_TPFinal)
 * Compile writing
 ```
 make all
@@ -81,7 +81,7 @@ make all
 make download
 ```
 ## Hardware Setup
-This proyect use de CH1 of de Analgog inputs. An easy way to test this firmware is with the hardware setup of the following picture:
+This proyect use the CH1 of the Analgog inputs. An easy way to test this firmware is with the hardware setup of the following picture:
   ![alt text](https://github.com/mrds90/PdM_TPFinal/blob/main/docs/HardwareSetup.png?raw=true)
 ## Help
 
@@ -91,7 +91,7 @@ make select_board
 ```
 and select edu_ciaa_nxp
 
-Always the terminal must be in the root path of firmware_v3 to use the command with CIAA Launcher terminal.
+Always the terminal must be in the root path of firmware_v3 to use the make commands with CIAA Launcher terminal.
 
 ## Author
 
