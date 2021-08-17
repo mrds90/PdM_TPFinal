@@ -23,7 +23,7 @@ From this firmware is used the sapi that is the HAL implemented in the project.
 
 For more information to use the firmware_v3 you can read the [English Readme](https://github.com/epernia/firmware_v3/blob/master/documentation/firmware/readme/readme-en.md) or [Spanish Readme](https://github.com/epernia/firmware_v3/blob/master/documentation/firmware/readme/readme-es.md)
 
-## Arqutecture
+## Arquitecture
 
 The PdM_TPFinal is the highest layer and use the services of the other layer. This files are:
 * button
