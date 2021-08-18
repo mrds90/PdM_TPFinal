@@ -6,32 +6,32 @@ Read the voltage of a DC signal and show the value with binary code using 4 leds
 
 This aplication have 3 modes
 
-| State  | Out                                                             |
+| State  | Output                                                          |
 | ------ | --------------------------------------------------------------- |
 | Normal | Read the adc value and show it with the leds as a binary number |
-| Resume | Use RGB leds to comunicate a high, normal or low voltage        |
+| Resume | Use RGB leds to communicate a high, normal or low voltage       |
 | Sleep  | Do nothing                                                      |
 
 
 ## Dependences
 ### CIAA Software
-The CIAA Software is necesary to compile and download the proyect.
+The CIAA Software is necessary to compile and download the project.
 The CIAA Software can be downloaded and installed following the [CIAA SOFTWARE TUTORIAL](https://github.com/epernia/software/)
 ### Firmware v3
-The [firmware_v3](https://github.com/epernia/firmware_v3/) is the firmware that the CIAA Proyect develop to use the hardware.
-From this firmware is used the sapi that is the HAL implemented in the proyect.
+The [firmware_v3](https://github.com/epernia/firmware_v3/) is the firmware that the CIAA Project developed to use the hardware.
+From this firmware is used the sapi that is the HAL implemented in the project.
 
 For more information to use the firmware_v3 you can read the [English Readme](https://github.com/epernia/firmware_v3/blob/master/documentation/firmware/readme/readme-en.md) or [Spanish Readme](https://github.com/epernia/firmware_v3/blob/master/documentation/firmware/readme/readme-es.md)
 
-## Arqutecture
+## Arquitecture
 
-The PdM_TPFinal is the highest layer and use the services of the other layer. This files are:
+The PdM_TPFinal is the main layer and use the services of the other layer. This second layer have 3 files:
 * button
 * led
 * sense
 
 ### Main
-This is the aplication layer. In this files the aplication use the services of the other layers to executes the states decribed on Description section.
+This is the application layer. In this files the application use the services of the other layer to executes the states described on Description section.
 In the figure there is the state representation of the system.
 ![alt text](https://github.com/mrds90/PdM_TPFinal/blob/main/docs/Mef.png?raw=true)
 
@@ -44,12 +44,16 @@ This states are:
 * DOWN
 * RISING
 
-In FALLING and RISING state the FSM check for a debounce efect. If the transition from UP to DOWN is confirmed the FSM report with a flag that the button was pressed. Similar behaviour for DOWN to UP transition.
+In FALLING and RISING state the FSM check for a debounce effect. If the transition from UP to DOWN is confirmed the FSM report with a flag that the button was pressed. The behavior for DOWN to UP transition is similar.
 ### Led
 This layer manage the lighting and shutdown of the leds.
 
+### Sense
+This layer manage the adc reading and interrupt.
+
 ## Download
-Open a Terminal where you have the firmware_v3 proyects to download this proyect. To do it should write:
+* Open a Terminal in firmware_v3 projects path to download this project.
+* Download the project writing:
 ```
 git clone https://github.com/mrds90/PdM_TPFinal
 ```
@@ -64,7 +68,7 @@ git clone https://github.com/mrds90/PdM_TPFinal
 ```
 make select_program
 ```
-* Choose the downladed repositorie (PdM_TPFinal)
+* Choose the downloaded repositorie (PdM_TPFinal)
 * Compile writing
 ```
 make all
@@ -77,7 +81,7 @@ make all
 make download
 ```
 ## Hardware Setup
-This proyect use de CH1 of de Analgog inputs. An easy way to test this firmware is with the hardware setup of the following picture:
+This proyect use the CH1 of the Analgog inputs. An easy way to test this firmware is with the hardware setup of the following picture:
   ![alt text](https://github.com/mrds90/PdM_TPFinal/blob/main/docs/HardwareSetup.png?raw=true)
 ## Help
 
@@ -87,9 +91,9 @@ make select_board
 ```
 and select edu_ciaa_nxp
 
-Always the terminal must be in the root path of firmware_v3 to use the command with CIAA Launcher terminal.
+Always the terminal must be in the root path of firmware_v3 to use the make commands with CIAA Launcher terminal.
 
-## Autor
+## Author
 
 Marcos Dominguez
 [@mrds90](https://github.com/mrds90)
