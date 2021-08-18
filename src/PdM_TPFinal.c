@@ -95,7 +95,6 @@ static void FSMMainPrgInit(void) {
    FSMButtonInit(TEC1);
    FSMButtonInit(TEC2);
    FSMButtonInit(TEC3);
-   ADCConfig(ISRAdquisition);
 }
 
 static void FSMMainPrgUpdate(void) {
